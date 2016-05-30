@@ -1,0 +1,15 @@
+{
+    "name": "ezsystems/platform-ui-search-prototype-bundle",
+    "require": {
+        "ezsystems/platform-ui-bundle": "^1.3"
+    },
+    "license": "GPL-2.0",
+    "homepage": "https://github.com/ezsystems/platform-ui-search-prototype-bundle",
+    "authors": [
+        {
+            "name": "eZ Systems dev team",
+            "email": "dev-team@ez.no"
+        }
+    ],
+    "minimum-stability": "stable"
+}
