@@ -6,3 +6,7 @@ system:
                     dependencyOf: ['ez-discoverybarview']
                     requires: ['ez-pluginregistry', 'plugin', 'base']
                     path: %platformui_search.public_dir%/js/views/plugins/ezsearch-searchbuttonplugin.js
+                ezsearch-routeappplugin:
+                    dependencyOf: ['ez-platformuiapp']
+                    requires: ['ez-pluginregistry', 'plugin', 'base']
+                    path: %platformui_search.public_dir%/js/apps/plugins/ezsearch-routeappplugin.js
