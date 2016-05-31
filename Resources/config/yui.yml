@@ -2,3 +2,7 @@ system:
     default:
         yui:
             modules:
+                ezsearch-searchbuttonplugin:
+                    dependencyOf: ['ez-discoverybarview']
+                    requires: ['ez-pluginregistry', 'plugin', 'base']
+                    path: %platformui_search.public_dir%/js/views/plugins/ezsearch-searchbuttonplugin.js
