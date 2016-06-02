@@ -8,5 +8,15 @@ system:
                     path: %platformui_search.public_dir%/js/views/plugins/ezsearch-searchbuttonplugin.js
                 ezsearch-routeappplugin:
                     dependencyOf: ['ez-platformuiapp']
-                    requires: ['ez-pluginregistry', 'plugin', 'base']
+                    requires: ['ez-pluginregistry', 'plugin', 'base', 'ezsearch-searchview', 'ezsearch-searchviewservice']
                     path: %platformui_search.public_dir%/js/apps/plugins/ezsearch-routeappplugin.js
+                ezsearch-searchview:
+                    requires: ['ez-templatebasedview', 'event-valuechange', 'ezsearchsearchview-ez-template']
+                    path: %platformui_search.public_dir%/js/views/ezsearch-searchview.js
+                ezsearchsearchview-ez-template:
+                    type: 'template'
+                    path: %platformui_search.public_dir%/templates/ezsearchsearchview.hbt
+                ezsearch-searchviewservice:
+                    requires: ['ez-viewservice']
+                    path: %platformui_search.public_dir%/js/views/services/ezsearch-searchviewservice.js
+

@@ -6,21 +6,32 @@ YUI.add('ezsearch-routeappplugin', function (Y) {
             var app = this.get('host');
 
             app.views.ezsearchSearchView = {
-                type: Y.View,
+                type: Y.eZSearch.SearchView,
             };
 
-            app.route({
-                name: "searchPrototype",
-                path: "/ezsearch/search",
-                view: "ezsearchSearchView",
-                sideViews: {'navigationHub': true, 'discoveryBar': true},
-                callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
-            });
+            this._addSearchRoute('searchPrototype', "/ezsearch/search");
+            this._addSearchRoute('doSearchPrototype', "/ezsearch/search/:searchString");
 
             app.on('*:searchPrototypeAction', function() {
                 app.navigateTo("searchPrototype");
             });
+
+            app.on('*:searchRequest', function(e) {
+                app.navigateTo("doSearchPrototype", {searchString: e.searchString});
+            })
         },
+
+        _addSearchRoute: function(name, path) {
+            this.get('host').route({
+                name: name,
+                path: path,
+                view: "ezsearchSearchView",
+                service: Y.eZSearch.SearchViewService,
+                sideViews: {'navigationHub': true, 'discoveryBar': true},
+                callbacks: ['open', 'checkUser', 'handleSideViews', 'handleMainView'],
+            });
+        },
+
     }, {
         NS: 'ezsearchRouteApp'
     });
