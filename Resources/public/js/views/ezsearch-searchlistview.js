@@ -8,37 +8,81 @@ YUI.add('ezsearch-searchlistview', function (Y) {
     Y.namespace('eZSearch');
 
     Y.eZSearch.SearchListView = Y.Base.create('ezsearchSearchListView', Y.eZ.TemplateBasedView, [], {
-      
+        initializer: function () {
+            this._itemViews = [];
+        },
         render: function () {
             this.get('container').setHTML(this.template({
-                searchResultItems: this._getResultItems(),
                 searchResultCount: this.get('searchResultCount'),
             }));
+            this._renderItems();
             return this;
         },
         
-        _getResultItems: function () {
-            var searchResultItems = [];
+        _renderItems: function () {
+            var contentNode = this.get('container').one('.ezsearch-searchlist-content'),
+                ItemView = this.get('itemViewConstructor');
 
             if ( !this.get('searchResultList') ) {
-                return this.get('searchResultList');
+                return;
             }
-
             this.get('searchResultList').forEach(function (struct) {
-                searchResultItems.push({
-                    content: struct.content.toJSON(),
-                    contentType: struct.contentType.toJSON(),
-                    location: struct.location.toJSON(),
-                });
+                var view = new ItemView({
+                        displayedProperties: this.get('displayedProperties'),
+                        location: struct.location,
+                        content: struct.content,
+                        contentType: struct.contentType,
+                        bubbleTargets: this,
+                    });
+
+                this._itemViews.push(view);
+                contentNode.append(view.render().get('container'));
             }, this);
-            return searchResultItems;
+        },
+        
+        _getColumns: function () {
+            return this.get('displayedProperties').map(function (identifier) {
+                return {
+                    name: this.get('propertyNames')[identifier],
+                    identifier: identifier,
+                };
+            }, this);
         },
 
     }, {
         ATTRS: {
             searchResultList: {},
-            searchResultItems: {},
             searchResultCount: {},
+            /**
+             * The properties to display
+             *
+             * @attribute displayedProperties
+             * @type Array
+             */
+            displayedProperties: {
+                value: ['name', 'lastModificationDate', 'contentType', 'translations'],
+            },
+
+            /**
+             * A key value object to store the human readable names of the
+             * columns.
+             *
+             * @attribute propertyNames
+             * @type {Object}
+             */
+            propertyNames: {
+                value: {
+                    'name': 'Name',
+                    'lastModificationDate': 'Modified',
+                    'contentType': 'Content type',
+                    'translations': 'Translations',
+                }
+            },
+            itemViewConstructor: {
+                valueFn: function () {
+                    return Y.eZ.SubitemListItemView;
+                },
+            },
         }
     });
 });

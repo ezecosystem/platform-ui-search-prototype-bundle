@@ -14,7 +14,7 @@ system:
                     requires: ['ez-templatebasedview', 'ezsearch-searchlistview', 'event-valuechange', 'ezsearchsearchview-ez-template']
                     path: %platformui_search.public_dir%/js/views/ezsearch-searchview.js
                 ezsearch-searchlistview:
-                    requires: ['ez-templatebasedview', 'ezsearchsearchlistview-ez-template']
+                    requires: ['ez-templatebasedview', 'ezsearchsearchlistview-ez-template', 'ez-subitemlistitemview']
                     path: %platformui_search.public_dir%/js/views/ezsearch-searchlistview.js
                 ezsearchsearchview-ez-template:
                     type: 'template'
