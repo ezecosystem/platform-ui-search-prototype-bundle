@@ -23,17 +23,19 @@ YUI.add('ezsearch-searchview', function (Y) {
                 })
             );
             this._uiSetMinHeight();
+            
+            if (this.get('searchString')) {
+                this._renderSearchListView();
+            }
             return this;
         },
 
-        /**
-         * Handles the `submitForm` event by preventing the original form to be
-         * submitted by the browser and by changing searchRequest attribute.
-         *
-         * @method _handleFormSubmit
-         * @protected
-         * @param {EventFacade} e
-         */
+        _renderSearchListView: function () {
+            this.get('container').one('.ezsearch-searchlist-content').append(
+                this.get('searchListView').render().get('container')
+            );
+        },
+
         _handleFormSubmit: function (e) {
             var form = e.currentTarget,
                 searchString = form.get('searchstring').get('value');
@@ -41,13 +43,7 @@ YUI.add('ezsearch-searchview', function (Y) {
             e.preventDefault();
             this._set('userSearchString', searchString);
         },
-
-        /**
-         * Sets the minimum height of the view
-         *
-         * @private
-         * @method _uiSetMinHeight
-         */
+        
         _uiSetMinHeight: function () {
             var container = this.get('container');
 
@@ -61,6 +57,18 @@ YUI.add('ezsearch-searchview', function (Y) {
                 readOnly: true
             },
             searchString: {},
+            searchResultList: {},
+            searchResultCount: {},
+            searchListView: {
+                writeOnce: 'initOnly',
+                valueFn: function () {
+                    return new Y.eZSearch.SearchListView({
+                        searchResultList: this.get('searchResultList'),
+                        searchResultCount: this.get('searchResultCount'),
+                        bubbleTargets: this,
+                    });
+                },
+            },
         }
     });
 });
