@@ -9,20 +9,7 @@
                 <th class="ezsearch-searchlist-translations-column">Translations</th>
             </tr>
             </thead>
-            <tbody class="ez-searchlist-content">
-                {{#each searchResultItems}}
-                    <tr>
-                        <td>
-                            <a href="{{path 'viewLocation' id=location.id languageCode=content.mainLanguageCode}}" class="ez-subitemgrid-item-link">
-                                {{content.name}}
-                            </a>
-                        </td>
-                        <td>{{content.lastModificationDate}}</td>
-                        <td>{{contentType.names.[eng-GB]}}</td>
-                        <td>{{content.currentVersion.languageCodes}}</td>
-                    </tr>
-                {{/each}}
-            </tbody>
+            <tbody class="ezsearch-searchlist-content"></tbody>
         </table>
     {{else}}
         <p class="ez-searchlist-no-result">This search has no result.</p>
