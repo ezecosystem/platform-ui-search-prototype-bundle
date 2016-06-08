@@ -3,5 +3,7 @@ system:
         css:
             files:
                 - %platformui_search.css_dir%/views/search.css
+                - %platformui_search.css_dir%/views/searchlist.css
+                - %platformui_search.css_dir%/theme/views/searchlist.css
                 - %platformui_search.css_dir%/theme/views/search.css
                 - %platformui_search.css_dir%/theme/views/actions/button.css

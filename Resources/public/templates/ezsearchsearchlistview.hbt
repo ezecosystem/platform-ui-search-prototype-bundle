@@ -1,0 +1,29 @@
+    {{#if searchResultItems}}
+        <p class="ezsearch-searchlist-count">Result list ({{searchResultCount}})</p>
+        <table class="ezsearch-resultlist-table pure-table pure-table-bordered">
+            <thead>
+            <tr>
+                <th class="ezsearch-searchlist-name-column">Name</th>
+                <th class="ezsearch-searchlist-lastModificationDate-column">Modified</th>
+                <th class="ezsearch-searchlist-contentType-column">Content type</th>
+                <th class="ezsearch-searchlist-translations-column">Translations</th>
+            </tr>
+            </thead>
+            <tbody class="ez-searchlist-content">
+                {{#each searchResultItems}}
+                    <tr>
+                        <td>
+                            <a href="{{path 'viewLocation' id=location.id languageCode=content.mainLanguageCode}}" class="ez-subitemgrid-item-link">
+                                {{content.name}}
+                            </a>
+                        </td>
+                        <td>{{content.lastModificationDate}}</td>
+                        <td>{{contentType.names.[eng-GB]}}</td>
+                        <td>{{content.currentVersion.languageCodes}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <p class="ez-searchlist-no-result">This search has no result.</p>
+    {{/if}}

@@ -11,11 +11,17 @@ system:
                     requires: ['ez-pluginregistry', 'plugin', 'base', 'ezsearch-searchview', 'ezsearch-searchviewservice']
                     path: %platformui_search.public_dir%/js/apps/plugins/ezsearch-routeappplugin.js
                 ezsearch-searchview:
-                    requires: ['ez-templatebasedview', 'event-valuechange', 'ezsearchsearchview-ez-template']
+                    requires: ['ez-templatebasedview', 'ezsearch-searchlistview', 'event-valuechange', 'ezsearchsearchview-ez-template']
                     path: %platformui_search.public_dir%/js/views/ezsearch-searchview.js
+                ezsearch-searchlistview:
+                    requires: ['ez-templatebasedview', 'ezsearchsearchlistview-ez-template']
+                    path: %platformui_search.public_dir%/js/views/ezsearch-searchlistview.js
                 ezsearchsearchview-ez-template:
                     type: 'template'
                     path: %platformui_search.public_dir%/templates/ezsearchsearchview.hbt
+                ezsearchsearchlistview-ez-template:
+                    type: 'template'
+                    path: %platformui_search.public_dir%/templates/ezsearchsearchlistview.hbt
                 ezsearch-searchviewservice:
                     requires: ['ez-viewservice']
                     path: %platformui_search.public_dir%/js/views/services/ezsearch-searchviewservice.js
