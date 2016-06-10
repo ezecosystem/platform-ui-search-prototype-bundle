@@ -7,26 +7,39 @@ YUI.add('ezsearch-searchlistview', function (Y) {
   
     Y.namespace('eZSearch');
 
-    Y.eZSearch.SearchListView = Y.Base.create('ezsearchSearchListView', Y.eZ.TemplateBasedView, [], {
+    Y.eZSearch.SearchListView = Y.Base.create('ezsearchSearchListView', Y.eZ.TemplateBasedView, [Y.eZ.LoadMorePagination], {
         initializer: function () {
             this._itemViews = [];
+            this._ItemView = this.get('itemViewConstructor');
+            this._itemViewBaseConfig = {
+                displayedProperties: this.get('displayedProperties'),
+            };
+            this._getExpectedItemsCount = this._getSearchResultCount;
         },
         render: function () {
+            var  unloadedItemCount= this.get('searchResultCount') - this._countLoadedItems();
+
             this.get('container').setHTML(this.template({
                 searchResultCount: this.get('searchResultCount'),
+                displayCount: this._countLoadedItems(),
+                remainingCount: this.get('limit') <= unloadedItemCount ? this.get('limit') : unloadedItemCount,
             }));
             this._renderItems();
             return this;
         },
-        
+
+        _getSearchResultCount: function () {
+            return this.get('searchResultCount');
+        },
+
         _renderItems: function () {
             var contentNode = this.get('container').one('.ezsearch-searchlist-content'),
                 ItemView = this.get('itemViewConstructor');
 
-            if ( !this.get('searchResultList') ) {
+            if ( !this.get('items') ) {
                 return;
             }
-            this.get('searchResultList').forEach(function (struct) {
+            this.get('items').forEach(function (struct) {
                 var view = new ItemView({
                         displayedProperties: this.get('displayedProperties'),
                         location: struct.location,
@@ -38,6 +51,9 @@ YUI.add('ezsearch-searchlistview', function (Y) {
                 this._itemViews.push(view);
                 contentNode.append(view.render().get('container'));
             }, this);
+            if( this.get('searchResultCount') > this._countLoadedItems() ) {
+                this._enableLoadMore();
+            }
         },
         
         _getColumns: function () {
@@ -51,7 +67,6 @@ YUI.add('ezsearch-searchlistview', function (Y) {
 
     }, {
         ATTRS: {
-            searchResultList: {},
             searchResultCount: {},
             /**
              * The properties to display

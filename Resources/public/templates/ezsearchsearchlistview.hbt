@@ -1,16 +1,30 @@
-    {{#if searchResultItems}}
+    {{#if searchResultCount}}
         <p class="ezsearch-searchlist-count">Result list ({{searchResultCount}})</p>
-        <table class="ezsearch-resultlist-table pure-table pure-table-bordered">
-            <thead>
-            <tr>
-                <th class="ezsearch-searchlist-name-column">Name</th>
-                <th class="ezsearch-searchlist-lastModificationDate-column">Modified</th>
-                <th class="ezsearch-searchlist-contentType-column">Content type</th>
-                <th class="ezsearch-searchlist-translations-column">Translations</th>
-            </tr>
-            </thead>
-            <tbody class="ezsearch-searchlist-content"></tbody>
-        </table>
+        <div class="ezsearch-searchlist-resultlist">
+            <table class="ezsearch-resultlist-table pure-table pure-table-bordered">
+                <thead>
+                <tr>
+                    <th class="ezsearch-searchlist-name-column">Name</th>
+                    <th class="ezsearch-searchlist-lastModificationDate-column">Modified</th>
+                    <th class="ezsearch-searchlist-contentType-column">Content type</th>
+                    <th class="ezsearch-searchlist-translations-column">Translations</th>
+                </tr>
+                </thead>
+                <tbody class="ezsearch-searchlist-content  ez-loadmorepagination-content"></tbody>
+            </table>
+
+            <div class="ezsearch-searchlist-pagination">
+                <p>
+                    viewing <strong class="ez-loadmorepagination-display-count">{{ displayCount }}</strong>
+                    out of <strong>{{ searchResultCount }}</strong> items
+                </p>
+                <p>
+                    <button class="pure-button ez-button ez-loadmorepagination-more ez-font-icon" disabled>
+                        Show <span class="ez-loadmorepagination-more-count">{{ remainingCount }}</span> more results
+                    </button>
+                </p>
+            </div>
+        </div>
     {{else}}
         <p class="ez-searchlist-no-result">This search has no result.</p>
     {{/if}}

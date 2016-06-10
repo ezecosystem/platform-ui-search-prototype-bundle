@@ -10,14 +10,17 @@ YUI.add('ezsearch-routeappplugin', function (Y) {
             };
 
             this._addSearchRoute('searchPrototype', "/ezsearch/search");
-            this._addSearchRoute('doSearchPrototype', "/ezsearch/search/:searchString");
+            this._addSearchRoute('doSearchPrototype', "/ezsearch/search/:searchString/:limit");
 
             app.on('*:searchPrototypeAction', function() {
                 app.navigateTo("searchPrototype");
             });
 
             app.on('*:searchRequest', function(e) {
-                app.navigateTo("doSearchPrototype", {searchString: e.searchString});
+                app.navigateTo("doSearchPrototype", {
+                    searchString: e.searchString,
+                    limit: e.limit,
+                });
             })
         },
 

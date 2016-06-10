@@ -5,3 +5,14 @@
 .ez-view-ezsearchsearchlistview .ezsearch-resultlist-table {
     width: 100%;
 }
+
+.ez-view-ezsearchsearchlistview .ezsearch-searchlist-resultlist {
+    padding: 1em;
+}
+
+
+.ez-view-ezsearchsearchlistview .ezsearch-searchlist-count {
+    margin: 0;
+    padding: 0 1rem 0 1em;
+    line-height: 2.5em;
+}
