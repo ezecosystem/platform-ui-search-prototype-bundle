@@ -4,6 +4,7 @@ YUI.add('ezsearch-searchviewservice', function (Y) {
     Y.eZSearch.SearchViewService = Y.Base.create('ezsearchSearchViewService', Y.eZ.ViewService, [], {
         _load: function (callback) {
             this.set('searchString', this.get('request').params.searchString);
+            this.set('limit', this.get('request').params.limit ? Number(this.get('request').params.limit) : this.get('loadMoreAddingNumber'));
 
             if (this.get('searchString')) {
                 this.fire('locationSearch', {
@@ -16,8 +17,8 @@ YUI.add('ezsearch-searchviewservice', function (Y) {
                         criteria: {
                             "FullTextCriterion": this.get('searchString'),
                         },
-                        offset: 0,
-                        limit: 10,
+                        limit: this.get('limit'),
+                        offset: 0
                     },
                 });
 
@@ -34,14 +35,20 @@ YUI.add('ezsearch-searchviewservice', function (Y) {
                 searchString: this.get('searchString'),
                 searchResultList: this.get('searchResultList'),
                 searchResultCount: this.get('searchResultCount'),
+                loadMoreAddingNumber: this.get('loadMoreAddingNumber'),
+                limit: this.get('limit'),
             };
         },
 
     }, {
         ATTRS: {
+            loadMoreAddingNumber: {
+                value: 10,
+            },
             searchString: {},
             searchResultList: {},
             searchResultCount: {},
+            limit: {},
             
         }
     });

@@ -12,8 +12,16 @@ YUI.add('ezsearch-searchview', function (Y) {
             this.after('userSearchStringChange', function() {
                 this.fire('searchRequest', {
                     searchString: this.get('userSearchString'),
+                    limit: this.get('loadMoreAddingNumber'),
                 });
-            })
+            });
+            this.after('ezsearchSearchListView:offsetChange', function(e) {
+                this._set('limit', this.get('limit') + this.get('loadMoreAddingNumber'));
+                this.fire('searchRequest', {
+                    searchString: this.get('searchString'),
+                    limit: this.get('limit'),
+                });
+            });
         },
 
         render: function () {
@@ -56,6 +64,8 @@ YUI.add('ezsearch-searchview', function (Y) {
             userSearchString: {
                 readOnly: true
             },
+            limit: {},
+            loadMoreAddingNumber: {},
             searchString: {},
             searchResultList: {},
             searchResultCount: {},
@@ -63,8 +73,10 @@ YUI.add('ezsearch-searchview', function (Y) {
                 writeOnce: 'initOnly',
                 valueFn: function () {
                     return new Y.eZSearch.SearchListView({
-                        searchResultList: this.get('searchResultList'),
+                        items: this.get('searchResultList'),
                         searchResultCount: this.get('searchResultCount'),
+                        limit: this.get('loadMoreAddingNumber'),
+                        offset: this.get('limit'),
                         bubbleTargets: this,
                     });
                 },
