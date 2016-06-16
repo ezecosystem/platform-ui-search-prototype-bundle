@@ -11,10 +11,14 @@
             "email": "dev-team@ez.no"
         }
     ],
-    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "EzSystems\\PlatformUISearchPrototypeBundle\\": ""
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
         }
     }
 }
