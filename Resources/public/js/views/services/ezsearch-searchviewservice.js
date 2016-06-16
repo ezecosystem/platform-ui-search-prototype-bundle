@@ -1,4 +1,10 @@
+/*
+ * Copyright (C) eZ Systems AS. All rights reserved.
+ * For full copyright and license information view LICENSE file distributed with this source code.
+ */
 YUI.add('ezsearch-searchviewservice', function (Y) {
+    "use strict";
+
     Y.namespace('eZSearch');
 
     Y.eZSearch.SearchViewService = Y.Base.create('ezsearchSearchViewService', Y.eZ.ViewService, [], {
@@ -52,7 +58,4 @@ YUI.add('ezsearch-searchviewservice', function (Y) {
             
         }
     });
-    Y.eZ.PluginRegistry.registerPlugin(
-        Y.eZ.Plugin.Search, ['ezsearchSearchViewService']
-    );
 });
