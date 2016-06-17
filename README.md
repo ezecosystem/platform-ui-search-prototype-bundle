@@ -15,7 +15,7 @@ that provides full text search capabilities to editors.
 2. Enable the bundle by adding:
 
   ```
-  new EzSystems\EzContentOnTheFlyBundle\EzSystemsEzContentOnTheFlyBundle()
+  new EzSystems\PlatformUISearchPrototypeBundle\EzSystemsPlatformUISearchPrototypeBundle()
   ```
 
   to `app/AppKernel.php`.
