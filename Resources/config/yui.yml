@@ -23,6 +23,6 @@ system:
                     type: 'template'
                     path: %platformui_search.public_dir%/templates/ezsearchsearchlistview.hbt
                 ezsearch-searchviewservice:
-                    requires: ['ez-viewservice']
+                    requires: ['ez-viewservice', 'ez-searchplugin']
                     path: %platformui_search.public_dir%/js/views/services/ezsearch-searchviewservice.js
 
