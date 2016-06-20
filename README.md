@@ -9,7 +9,7 @@ that provides full text search capabilities to editors.
 1. From your eZ Platform installation, run composer:
 
   ```
-  $ composer require ezsystems/platform-ui-search-prototype-bundle
+  $ composer require ezsystems/platform-ui-search-prototype-bundle:^0.1.2
   ```
 
 2. Enable the bundle by adding:
