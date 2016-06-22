@@ -7,24 +7,20 @@ YUI.add('ezsearch-searchviewservice', function (Y) {
             this.set('limit', this.get('request').params.limit ? Number(this.get('request').params.limit) : this.get('loadMoreAddingNumber'));
 
             if (this.get('searchString')) {
-                this.fire('locationSearch', {
+                this.search.findLocations({
                     viewName: 'search-' + this.get('searchString'),
-                    resultAttribute: 'searchResultList',
-                    resultTotalCountAttribute: 'searchResultCount',
                     loadContent: true,
                     loadContentType: true,
-                    search: {
-                        criteria: {
-                            "FullTextCriterion": this.get('searchString'),
-                        },
-                        limit: this.get('limit'),
-                        offset: 0
+                    criteria: {
+                        "FullTextCriterion": this.get('searchString'),
                     },
-                });
-
-                this.onceAfter('searchResultListChange', function () {
+                    limit: this.get('limit'),
+                    offset: 0
+                }, Y.bind(function (error, results, resultCount) {
+                    this.set('searchResultList', results);
+                    this.set('searchResultCount', resultCount);
                     callback();
-                })
+                }, this));
             } else {
                 callback();
             }
