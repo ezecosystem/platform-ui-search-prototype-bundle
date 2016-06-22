@@ -17,12 +17,13 @@ YUI.add('ezsearch-searchlistview', function (Y) {
             this._getExpectedItemsCount = this._getSearchResultCount;
         },
         render: function () {
-            var  unloadedItemCount= this.get('searchResultCount') - this._countLoadedItems();
+            var itemsCount = this.get('items').length,
+                remainingItemsCount = this.get('searchResultCount') - itemsCount;
 
             this.get('container').setHTML(this.template({
                 searchResultCount: this.get('searchResultCount'),
-                displayCount: this._countLoadedItems(),
-                remainingCount: this.get('limit') <= unloadedItemCount ? this.get('limit') : unloadedItemCount,
+                displayCount: itemsCount,
+                remainingCount: this.get('limit') <= remainingItemsCount ? this.get('limit') : remainingItemsCount,
             }));
             this._renderItems();
             return this;
